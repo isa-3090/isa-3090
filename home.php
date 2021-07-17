@@ -1,4 +1,6 @@
-<?php include ('config/conn.php') ?>
+<?php 
+  session_start();
+  include ('config/conn.php') ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,43 +36,9 @@
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
-  <header class="main-header">
-    <!-- Logo -->
-    <a href="home.php" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>AA MIA</b></span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>AA MIA</b></span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-      </a>
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          <!-- LogOut Button -->
-          <li>
-            <a a href="index.php" class="btn btn-primary">LogOut</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  </header>
+  <?php include'include/header.php';?>
   <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu" data-widget="tree">
-        <li class="active treeview">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-          </a>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
+  <?php include'include/aside.php';?>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -84,16 +52,15 @@
         <li class="active">Dashboard</li>
       </ol>
     </section>
-    <?php include 'profile.php';?>
+    <section class="content-body">
+            <a a href="#" class="">
+
+            </a>
+    </section>
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 1.0 beta
-    </div>
-    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AA MIA</a>.</strong> All rights
-    reserved.
-  </footer>
+  
+  <?php include'include/footer.php';?>
 
   
   <!-- Add the sidebar's background. This div must be placed
@@ -140,53 +107,6 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 
-<!-- page script -->
-<script>
-  $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-    });
-  });
-</script>
-
-<script>
-$(function(){
-  $(document).on('click', '.edit', function(e){
-    e.preventDefault();
-    $('#edit').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-
-  $(document).on('click', '.delete', function(e){
-    e.preventDefault();
-    $('#delete').modal('show');
-    var id = $(this).data('id');
-    getRow(id);
-  });
-});
-
-function getRow(id){
-  $.ajax({
-    type: 'POST',
-    url: 'admin_row.php',
-    data: {id:id},
-    dataType: 'json',
-    success: function(response){
-      $('.id').val(response.id);
-      $('#edit_name').val(response.name);
-      $('#edit_email').val(response.email);
-      $('.del_admin').html(response.id+' '+response.name+' '+response.email);
-    }
-  });
-}
-</script>
 
 </body>
 </html>
